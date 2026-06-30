@@ -5,9 +5,10 @@
 replicaCount: 1
 
 image:
-  # Giant Swarm mirror of quay.io/prometheuscommunity, preserving the upstream path.
+  # Giant Swarm mirror (retagged into the giantswarm/ namespace) of
+  # quay.io/prometheuscommunity/yet-another-cloudwatch-exporter.
   registry: gsoci.azurecr.io
-  repository: prometheuscommunity/yet-another-cloudwatch-exporter
+  repository: giantswarm/yet-another-cloudwatch-exporter
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""

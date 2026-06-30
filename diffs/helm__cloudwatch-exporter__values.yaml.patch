@@ -1,18 +1,21 @@
 diff --git a/vendor/cloudwatch-exporter/values.yaml b/helm/cloudwatch-exporter/values.yaml
-index 17d7b3a..48ebfbc 100644
+index 17d7b3a..f3638c3 100644
 --- a/vendor/cloudwatch-exporter/values.yaml
 +++ b/helm/cloudwatch-exporter/values.yaml
-@@ -5,7 +5,8 @@
+@@ -5,8 +5,10 @@
  replicaCount: 1
  
  image:
 -  registry: quay.io
-+  # Giant Swarm mirror of quay.io/prometheuscommunity, preserving the upstream path.
+-  repository: prometheuscommunity/yet-another-cloudwatch-exporter
++  # Giant Swarm mirror (retagged into the giantswarm/ namespace) of
++  # quay.io/prometheuscommunity/yet-another-cloudwatch-exporter.
 +  registry: gsoci.azurecr.io
-   repository: prometheuscommunity/yet-another-cloudwatch-exporter
++  repository: giantswarm/yet-another-cloudwatch-exporter
    pullPolicy: IfNotPresent
    # Overrides the image tag whose default is the chart appVersion.
-@@ -151,7 +152,7 @@ aws:
+   tag: ""
+@@ -151,7 +153,7 @@ aws:
  
  serviceMonitor:
    # When set true then use a ServiceMonitor to configure scraping
