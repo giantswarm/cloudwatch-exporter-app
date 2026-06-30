@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- changed: Regenerated `.circleci` config with `devctl gen circleci` — adopt the dynamic-config setup workflow (`config.yml` + `workflows.yml`) and bump the architect orb to v9.5.2.
-- changed: `app.giantswarm.io` label group was changed to `application.giantswarm.io`
+- added: Initial chart, wrapping the upstream `prometheus-yet-another-cloudwatch-exporter` chart (`0.46.1`, appVersion `v0.65.0`) from the `prometheus-community` Helm repository. The upstream chart is vendored with `vendir` and customized through the values patch in `sync/patches/values/`.
+- changed: Default the image registry to the Giant Swarm mirror `gsoci.azurecr.io` and enable the `ServiceMonitor` by default.
+- changed: Replaced the generated dynamic-config `.circleci` with a static `config.yml` (architect orb v9.5.5) that packages and pushes the chart to the app catalog on tag.
 
-[Unreleased]: https://github.com/giantswarm/{APP-NAME}/tree/main
+[Unreleased]: https://github.com/giantswarm/cloudwatch-exporter-app/tree/main
