@@ -1,21 +1,19 @@
 diff --git a/vendor/cloudwatch-exporter/values.yaml b/helm/cloudwatch-exporter/values.yaml
-index 17d7b3a..bb24fd4 100644
+index 17d7b3a..a991e4f 100644
 --- a/vendor/cloudwatch-exporter/values.yaml
 +++ b/helm/cloudwatch-exporter/values.yaml
-@@ -5,8 +5,10 @@
+@@ -5,8 +5,8 @@
  replicaCount: 1
  
  image:
 -  registry: quay.io
 -  repository: prometheuscommunity/yet-another-cloudwatch-exporter
-+  # Giant Swarm mirror (retagged into the giantswarm/ namespace) of
-+  # quay.io/prometheuscommunity/yet-another-cloudwatch-exporter.
 +  registry: gsoci.azurecr.io
 +  repository: giantswarm/yet-another-cloudwatch-exporter
    pullPolicy: IfNotPresent
    # Overrides the image tag whose default is the chart appVersion.
    tag: ""
-@@ -41,16 +43,25 @@ portName: http
+@@ -41,16 +41,23 @@ portName: http
  
  containerPort: 5000
  
@@ -29,8 +27,6 @@ index 17d7b3a..bb24fd4 100644
 -  # readOnlyRootFilesystem: true
 -  # runAsNonRoot: true
 -  # runAsUser: 1000
-+# Hardened by default to satisfy Giant Swarm's Pod Security Standards
-+# (restricted) policies enforced via Kyverno. Override deliberately if needed.
 +podSecurityContext:
 +  runAsNonRoot: true
 +  runAsUser: 1000
@@ -51,7 +47,7 @@ index 17d7b3a..bb24fd4 100644
  
  service:
    type: ClusterIP
-@@ -151,7 +162,7 @@ aws:
+@@ -151,7 +158,7 @@ aws:
  
  serviceMonitor:
    # When set true then use a ServiceMonitor to configure scraping
