@@ -2,24 +2,18 @@
 # for details and background.
 
 apiVersion: v2
-
 # Version of the packaged app. Matches the upstream chart's appVersion and the
 # image tag mirrored into gsoci (the "v" prefix is significant).
 appVersion: "v0.65.0"
-
 # Make sure your name DOES NOT end in "app" or "-app".
 name: cloudwatch-exporter
-
 # Please describe what the app provides in a sentence or two.
 description: Yet Another CloudWatch Exporter (yace) - a CloudWatch metrics exporter for Prometheus.
-
 # URL of the GitHub repository that is the source of this Chart.yaml file.
 home: https://github.com/giantswarm/cloudwatch-exporter-app
-
 # If you have an icon/logo, you should add it to https://github.com/giantswarm/web-assets
 # and set the final URL here.
 icon: https://s.giantswarm.io/app-icons/giantswarm/1/light.svg
-
 keywords:
   - cloudwatch
   - prometheus
@@ -30,7 +24,7 @@ sources:
   - https://github.com/prometheus-community/yet-another-cloudwatch-exporter
   - https://github.com/prometheus-community/helm-charts
 type: application
-version: 0.0.0-dev
+version: 0.0.1
 annotations:
   # Adapt to 'giantswarm' if this application is not to be deployed by customers
   io.giantswarm.application.audience: all
