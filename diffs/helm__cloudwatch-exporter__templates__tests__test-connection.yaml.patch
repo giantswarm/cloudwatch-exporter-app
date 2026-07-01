@@ -1,8 +1,8 @@
 diff --git a/vendor/cloudwatch-exporter/templates/tests/test-connection.yaml b/helm/cloudwatch-exporter/templates/tests/test-connection.yaml
-index 3eb52fe..1c5bc3d 100644
+index 3eb52fe..0d99396 100644
 --- a/vendor/cloudwatch-exporter/templates/tests/test-connection.yaml
 +++ b/helm/cloudwatch-exporter/templates/tests/test-connection.yaml
-@@ -8,9 +8,25 @@ metadata:
+@@ -8,9 +8,31 @@ metadata:
    annotations:
      "helm.sh/hook": test
  spec:
@@ -13,7 +13,14 @@ index 3eb52fe..1c5bc3d 100644
 +      type: RuntimeDefault
    containers:
      - name: wget
-       image: busybox
+-      image: busybox
++      image: gsoci.azurecr.io/giantswarm/busybox:1.37.0
++      resources:
++        requests:
++          cpu: 10m
++          memory: 16Mi
++        limits:
++          memory: 16Mi
 +      securityContext:
 +        allowPrivilegeEscalation: false
 +        privileged: false
