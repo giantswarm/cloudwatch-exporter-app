@@ -5,8 +5,6 @@
 replicaCount: 1
 
 image:
-  # Giant Swarm mirror (retagged into the giantswarm/ namespace) of
-  # quay.io/prometheuscommunity/yet-another-cloudwatch-exporter.
   registry: gsoci.azurecr.io
   repository: giantswarm/yet-another-cloudwatch-exporter
   pullPolicy: IfNotPresent
@@ -43,16 +41,23 @@ portName: http
 
 containerPort: 5000
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  seccompProfile:
+    type: RuntimeDefault
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext:
+  allowPrivilegeEscalation: false
+  privileged: false
+  runAsNonRoot: true
+  runAsUser: 1000
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+  seccompProfile:
+    type: RuntimeDefault
 
 service:
   type: ClusterIP

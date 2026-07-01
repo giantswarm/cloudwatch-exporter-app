@@ -17,3 +17,6 @@ directories:
     ignorePaths:
       - Chart.yaml
       - Chart.lock
+      # Hardened in-place for Giant Swarm Pod Security Standards (restricted);
+      # owned by us so vendir does not revert the securityContext on sync.
+      - templates/tests/test-connection.yaml

@@ -1,9 +1,9 @@
 diff --git a/helm/cloudwatch-exporter/values.schema.json b/helm/cloudwatch-exporter/values.schema.json
 new file mode 100644
-index 0000000..5cc0a30
+index 0000000..3486518
 --- /dev/null
 +++ b/helm/cloudwatch-exporter/values.schema.json
-@@ -0,0 +1,220 @@
+@@ -0,0 +1,244 @@
 +{
 +    "$schema": "http://json-schema.org/schema#",
 +    "type": "object",
@@ -78,10 +78,34 @@ index 0000000..5cc0a30
 +            "type": "integer"
 +        },
 +        "podSecurityContext": {
-+            "type": "object"
++            "type": "object",
++            "properties": {
++                "runAsNonRoot": {
++                    "const": true
++                },
++                "runAsUser": {
++                    "type": "integer",
++                    "minimum": 1
++                }
++            }
 +        },
 +        "securityContext": {
-+            "type": "object"
++            "type": "object",
++            "properties": {
++                "allowPrivilegeEscalation": {
++                    "const": false
++                },
++                "privileged": {
++                    "const": false
++                },
++                "runAsNonRoot": {
++                    "const": true
++                },
++                "runAsUser": {
++                    "type": "integer",
++                    "minimum": 1
++                }
++            }
 +        },
 +        "service": {
 +            "type": "object",
