@@ -1,18 +1,35 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/giantswarm/{APP-NAME}/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/giantswarm/{APP-NAME}/tree/main)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/giantswarm/{APP-NAME}/badge)](https://securityscorecards.dev/viewer/?uri=github.com/giantswarm/{APP-NAME})
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/giantswarm/cloudwatch-exporter-app/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/giantswarm/cloudwatch-exporter-app/tree/main)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/giantswarm/cloudwatch-exporter-app/badge)](https://securityscorecards.dev/viewer/?uri=github.com/giantswarm/cloudwatch-exporter-app)
 
 [Guide about how to manage an app on Giant Swarm](https://handbook.giantswarm.io/docs/dev-and-releng/app-developer-processes/adding_app_to_appcatalog/)
 
-# {APP-NAME} chart
+# cloudwatch-exporter-app chart
 
-Giant Swarm offers a {APP-NAME} App which can be installed in workload clusters.
-Here, we define the {APP-NAME} chart with its templates and default configuration.
+Giant Swarm offers a cloudwatch-exporter App which can be installed in workload clusters.
+Here, we define the cloudwatch-exporter chart with its templates and default configuration.
 
 **What is this app?**
 
+[Yet Another CloudWatch Exporter (yace)](https://github.com/prometheus-community/yet-another-cloudwatch-exporter) is a Prometheus exporter for AWS CloudWatch metrics. This chart is a Giant Swarm wrapper around the upstream `prometheus-yet-another-cloudwatch-exporter` chart.
+
 **Why did we add it?**
 
+To expose AWS CloudWatch metrics to Prometheus on Giant Swarm clusters through the app platform.
+
 **Who can use it?**
+
+Anyone running on AWS who needs CloudWatch metrics scraped into their monitoring stack.
+
+## Upstream sync
+
+This chart is not hand-written; it is generated from the upstream chart with `vendir` and customized with a values patch. To update or re-sync:
+
+```bash
+# edit the chart version in vendir.yml, then:
+./sync/sync.sh
+```
+
+`sync/sync.sh` runs `vendir sync` to fetch the upstream chart into `vendor/` and `helm/cloudwatch-exporter/`, applies the patch in `sync/patches/values/`, and records the resulting divergences from upstream under `diffs/`. Customizations live only in `sync/patches/` and `helm/cloudwatch-exporter/Chart.yaml`; never edit the generated chart files directly.
 
 ## Installing
 
@@ -65,4 +82,4 @@ Not following these limitations will most likely result in a broken deployment.
 
 ## Credit
 
-- {APP HELM REPOSITORY}
+- [prometheus-community/helm-charts](https://github.com/prometheus-community/helm-charts)

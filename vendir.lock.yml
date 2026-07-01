@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - helmChart:
+      appVersion: v0.65.0
+      version: 0.46.1
+    path: cloudwatch-exporter
+  path: vendor
+- contents:
+  - directory: {}
+    path: .
+  path: helm/cloudwatch-exporter
+kind: LockConfig

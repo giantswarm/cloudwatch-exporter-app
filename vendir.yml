@@ -1,0 +1,19 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+- path: vendor
+  contents:
+  - path: cloudwatch-exporter
+    helmChart:
+      name: prometheus-yet-another-cloudwatch-exporter
+      version: "0.46.1"
+      repository:
+        url: https://prometheus-community.github.io/helm-charts
+- path: helm/cloudwatch-exporter
+  contents:
+  - path: .
+    directory:
+      path: vendor/cloudwatch-exporter
+    ignorePaths:
+      - Chart.yaml
+      - Chart.lock

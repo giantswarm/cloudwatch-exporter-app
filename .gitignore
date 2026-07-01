@@ -1,2 +1,4 @@
 vendor
 .vendir*
+build
+helm/cloudwatch-exporter/charts
