@@ -72,10 +72,34 @@
             "type": "integer"
         },
         "podSecurityContext": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "runAsNonRoot": {
+                    "const": true
+                },
+                "runAsUser": {
+                    "type": "integer",
+                    "minimum": 1
+                }
+            }
         },
         "securityContext": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "allowPrivilegeEscalation": {
+                    "const": false
+                },
+                "privileged": {
+                    "const": false
+                },
+                "runAsNonRoot": {
+                    "const": true
+                },
+                "runAsUser": {
+                    "type": "integer",
+                    "minimum": 1
+                }
+            }
         },
         "service": {
             "type": "object",

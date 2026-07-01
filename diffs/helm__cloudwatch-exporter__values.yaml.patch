@@ -1,5 +1,5 @@
 diff --git a/vendor/cloudwatch-exporter/values.yaml b/helm/cloudwatch-exporter/values.yaml
-index 17d7b3a..f3638c3 100644
+index 17d7b3a..bb24fd4 100644
 --- a/vendor/cloudwatch-exporter/values.yaml
 +++ b/helm/cloudwatch-exporter/values.yaml
 @@ -5,8 +5,10 @@
@@ -15,7 +15,43 @@ index 17d7b3a..f3638c3 100644
    pullPolicy: IfNotPresent
    # Overrides the image tag whose default is the chart appVersion.
    tag: ""
-@@ -151,7 +153,7 @@ aws:
+@@ -41,16 +43,25 @@ portName: http
+ 
+ containerPort: 5000
+ 
+-podSecurityContext: {}
+-  # fsGroup: 2000
+-
+-securityContext: {}
+-  # capabilities:
+-  #   drop:
+-  #   - ALL
+-  # readOnlyRootFilesystem: true
+-  # runAsNonRoot: true
+-  # runAsUser: 1000
++# Hardened by default to satisfy Giant Swarm's Pod Security Standards
++# (restricted) policies enforced via Kyverno. Override deliberately if needed.
++podSecurityContext:
++  runAsNonRoot: true
++  runAsUser: 1000
++  seccompProfile:
++    type: RuntimeDefault
++
++securityContext:
++  allowPrivilegeEscalation: false
++  privileged: false
++  runAsNonRoot: true
++  runAsUser: 1000
++  readOnlyRootFilesystem: true
++  capabilities:
++    drop:
++      - ALL
++  seccompProfile:
++    type: RuntimeDefault
+ 
+ service:
+   type: ClusterIP
+@@ -151,7 +162,7 @@ aws:
  
  serviceMonitor:
    # When set true then use a ServiceMonitor to configure scraping

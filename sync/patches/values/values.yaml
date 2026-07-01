@@ -43,16 +43,25 @@ portName: http
 
 containerPort: 5000
 
-podSecurityContext: {}
-  # fsGroup: 2000
+# Hardened by default to satisfy Giant Swarm's Pod Security Standards
+# (restricted) policies enforced via Kyverno. Override deliberately if needed.
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  seccompProfile:
+    type: RuntimeDefault
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext:
+  allowPrivilegeEscalation: false
+  privileged: false
+  runAsNonRoot: true
+  runAsUser: 1000
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+  seccompProfile:
+    type: RuntimeDefault
 
 service:
   type: ClusterIP

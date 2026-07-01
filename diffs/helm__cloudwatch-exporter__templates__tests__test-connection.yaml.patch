@@ -1,0 +1,30 @@
+diff --git a/vendor/cloudwatch-exporter/templates/tests/test-connection.yaml b/helm/cloudwatch-exporter/templates/tests/test-connection.yaml
+index 3eb52fe..1c5bc3d 100644
+--- a/vendor/cloudwatch-exporter/templates/tests/test-connection.yaml
++++ b/helm/cloudwatch-exporter/templates/tests/test-connection.yaml
+@@ -8,9 +8,25 @@ metadata:
+   annotations:
+     "helm.sh/hook": test
+ spec:
++  securityContext:
++    runAsNonRoot: true
++    runAsUser: 1000
++    seccompProfile:
++      type: RuntimeDefault
+   containers:
+     - name: wget
+       image: busybox
++      securityContext:
++        allowPrivilegeEscalation: false
++        privileged: false
++        runAsNonRoot: true
++        runAsUser: 1000
++        readOnlyRootFilesystem: true
++        capabilities:
++          drop:
++            - ALL
++        seccompProfile:
++          type: RuntimeDefault
+       command: ['wget']
+       args: ['{{ include "yet-another-cloudwatch-exporter.fullname" . }}:{{ .Values.service.port }}']
+   restartPolicy: Never
