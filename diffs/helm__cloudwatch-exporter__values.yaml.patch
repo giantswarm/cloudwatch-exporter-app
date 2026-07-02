@@ -1,5 +1,5 @@
 diff --git a/vendor/cloudwatch-exporter/values.yaml b/helm/cloudwatch-exporter/values.yaml
-index 17d7b3a..d06bb8f 100644
+index 17d7b3a..794f111 100644
 --- a/vendor/cloudwatch-exporter/values.yaml
 +++ b/helm/cloudwatch-exporter/values.yaml
 @@ -5,8 +5,8 @@
@@ -80,84 +80,48 @@ index 17d7b3a..d06bb8f 100644
    # Set the namespace the ServiceMonitor should be deployed
    # namespace: monitoring
    # Set how frequently Prometheus should scrape
-@@ -215,33 +217,64 @@ config: |-
-   sts-region: eu-west-1
-   discovery:
-     exportedTagsOnMetrics:
+@@ -210,38 +212,9 @@ prometheusRule:
+ configMap:
+   enabled: true
+ 
+-config: |-
+-  apiVersion: v1alpha1
+-  sts-region: eu-west-1
+-  discovery:
+-    exportedTagsOnMetrics:
 -      AWS/ES:
 -        - Name
-+      AWS/NetworkELB:
-+        - elbv2.k8s.aws/cluster
-+        - kubernetes.io/service-name
-+        - service.k8s.aws/stack
-     jobs:
+-    jobs:
 -    - type: AWS/ES
-+    - type: AWS/NetworkELB
-       regions:
+-      regions:
 -        - eu-west-1
-+        - eu-north-1
-       searchTags:
+-      searchTags:
 -        - key: type
 -          value: ^(easteregg|k8s)$
-+        - key: elbv2.k8s.aws/cluster
-+          value: .*
-       metrics:
+-      metrics:
 -        - name: FreeStorageSpace
-+        - name: ActiveFlowCount
-+          statistics:
-+          - Average
-+          - Maximum
-+          period: 60
-+          length: 300
-+        - name: ConsumedLCUs
-+          statistics:
-+          - Average
-+          - Maximum
-+          period: 60
-+          length: 300
-+        - name: NewFlowCount
-           statistics:
-           - Sum
-           period: 60
+-          statistics:
+-          - Sum
+-          period: 60
 -          length: 600
 -        - name: ClusterStatus.green
-+          length: 300
-+        - name: ProcessedBytes
-           statistics:
+-          statistics:
 -          - Minimum
-+          - Sum
-           period: 60
+-          period: 60
 -          length: 600
 -        - name: ClusterStatus.yellow
-+          length: 300
-+        - name: TCP_Client_Reset_Count
-           statistics:
+-          statistics:
 -          - Maximum
-+          - Sum
-+          period: 60
-+          length: 300
-+        - name: TCP_ELB_Reset_Count
-+          statistics:
-+          - Sum
-+          period: 60
-+          length: 300
-+        - name: TCP_Target_Reset_Count
-+          statistics:
-+          - Sum
-+          period: 60
-+          length: 300
-+        - name: HealthyHostCount
-+          statistics:
-+          - Average
-+          - Minimum
-           period: 60
+-          period: 60
 -          length: 600
 -        - name: ClusterStatus.red
-+          length: 300
-+        - name: UnHealthyHostCount
-           statistics:
-+          - Average
-           - Maximum
-           period: 60
+-          statistics:
+-          - Maximum
+-          period: 60
 -          length: 600
-+          length: 300
++# Cluster ID that owns the NLBs to scrape. Rendered as the
++# elbv2.k8s.aws/cluster search tag value in the generated config.
++clusterID: ""
++
++# AWS region used for STS and CloudWatch discovery.
++region: eu-north-1

@@ -1,0 +1,75 @@
+diff --git a/vendor/cloudwatch-exporter/templates/configmap.yaml b/helm/cloudwatch-exporter/templates/configmap.yaml
+index d541f8d..f8be47c 100644
+--- a/vendor/cloudwatch-exporter/templates/configmap.yaml
++++ b/helm/cloudwatch-exporter/templates/configmap.yaml
+@@ -8,5 +8,69 @@ metadata:
+     {{- include "yet-another-cloudwatch-exporter.labels" . | nindent 4 }}
+ data:
+   config.yml: |
+-{{- (tpl .Values.config $) | nindent 4 }}
++    apiVersion: v1alpha1
++    sts-region: {{ .Values.region }}
++    discovery:
++      exportedTagsOnMetrics:
++        AWS/NetworkELB:
++          - elbv2.k8s.aws/cluster
++          - kubernetes.io/service-name
++          - service.k8s.aws/stack
++      jobs:
++      - type: AWS/NetworkELB
++        regions:
++          - {{ .Values.region }}
++        searchTags:
++          - key: elbv2.k8s.aws/cluster
++            value: {{ .Values.clusterID | quote }}
++        metrics:
++          - name: ActiveFlowCount
++            statistics:
++            - Average
++            - Maximum
++            period: 60
++            length: 300
++          - name: ConsumedLCUs
++            statistics:
++            - Average
++            - Maximum
++            period: 60
++            length: 300
++          - name: NewFlowCount
++            statistics:
++            - Sum
++            period: 60
++            length: 300
++          - name: ProcessedBytes
++            statistics:
++            - Sum
++            period: 60
++            length: 300
++          - name: TCP_Client_Reset_Count
++            statistics:
++            - Sum
++            period: 60
++            length: 300
++          - name: TCP_ELB_Reset_Count
++            statistics:
++            - Sum
++            period: 60
++            length: 300
++          - name: TCP_Target_Reset_Count
++            statistics:
++            - Sum
++            period: 60
++            length: 300
++          - name: HealthyHostCount
++            statistics:
++            - Average
++            - Minimum
++            period: 60
++            length: 300
++          - name: UnHealthyHostCount
++            statistics:
++            - Average
++            - Maximum
++            period: 60
++            length: 300
+ {{- end }}

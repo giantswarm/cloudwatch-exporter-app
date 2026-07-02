@@ -237,7 +237,10 @@
                 }
             }
         },
-        "config": {
+        "clusterID": {
+            "type": "string"
+        },
+        "region": {
             "type": "string"
         }
     }

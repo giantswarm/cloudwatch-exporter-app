@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Default discovery config to scrape NLB (`AWS/NetworkELB`) metrics, discovered by the `elbv2.k8s.aws/cluster` tag.
+- Generate `config.yml` statically from structured values instead of the opaque `config` string; `clusterID` sets the `elbv2.k8s.aws/cluster` tag value and `region` sets both `sts-region` and the discovery region.
 - Default the image registry to the Giant Swarm mirror `gsoci.azurecr.io` and enable the `ServiceMonitor` by default.
 - Replaced the generated dynamic-config `.circleci` with a static `config.yml` (architect orb v9.5.5) that packages and pushes the chart to the app catalog on tag.
 - Harden `securityContext` defaults for PSS restricted compliance on the Deployment and test pod, and reject non-compliant overrides in the schema.
