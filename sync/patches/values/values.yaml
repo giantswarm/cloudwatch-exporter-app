@@ -224,7 +224,7 @@ config: |-
     jobs:
     - type: AWS/NetworkELB
       regions:
-        - eu-west-1
+        - eu-north-1
       searchTags:
         - key: elbv2.k8s.aws/cluster
           value: .*

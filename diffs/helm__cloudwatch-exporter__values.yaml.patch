@@ -1,5 +1,5 @@
 diff --git a/vendor/cloudwatch-exporter/values.yaml b/helm/cloudwatch-exporter/values.yaml
-index 17d7b3a..d1bf4cb 100644
+index 17d7b3a..d06bb8f 100644
 --- a/vendor/cloudwatch-exporter/values.yaml
 +++ b/helm/cloudwatch-exporter/values.yaml
 @@ -5,8 +5,8 @@
@@ -94,7 +94,8 @@ index 17d7b3a..d1bf4cb 100644
 -    - type: AWS/ES
 +    - type: AWS/NetworkELB
        regions:
-         - eu-west-1
+-        - eu-west-1
++        - eu-north-1
        searchTags:
 -        - key: type
 -          value: ^(easteregg|k8s)$
