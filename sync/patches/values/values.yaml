@@ -217,33 +217,64 @@ config: |-
   sts-region: eu-west-1
   discovery:
     exportedTagsOnMetrics:
-      AWS/ES:
-        - Name
+      AWS/NetworkELB:
+        - elbv2.k8s.aws/cluster
+        - kubernetes.io/service-name
+        - service.k8s.aws/stack
     jobs:
-    - type: AWS/ES
+    - type: AWS/NetworkELB
       regions:
         - eu-west-1
       searchTags:
-        - key: type
-          value: ^(easteregg|k8s)$
+        - key: elbv2.k8s.aws/cluster
+          value: .*
       metrics:
-        - name: FreeStorageSpace
+        - name: ActiveFlowCount
+          statistics:
+          - Average
+          - Maximum
+          period: 60
+          length: 300
+        - name: ConsumedLCUs
+          statistics:
+          - Average
+          - Maximum
+          period: 60
+          length: 300
+        - name: NewFlowCount
           statistics:
           - Sum
           period: 60
-          length: 600
-        - name: ClusterStatus.green
+          length: 300
+        - name: ProcessedBytes
           statistics:
+          - Sum
+          period: 60
+          length: 300
+        - name: TCP_Client_Reset_Count
+          statistics:
+          - Sum
+          period: 60
+          length: 300
+        - name: TCP_ELB_Reset_Count
+          statistics:
+          - Sum
+          period: 60
+          length: 300
+        - name: TCP_Target_Reset_Count
+          statistics:
+          - Sum
+          period: 60
+          length: 300
+        - name: HealthyHostCount
+          statistics:
+          - Average
           - Minimum
           period: 60
-          length: 600
-        - name: ClusterStatus.yellow
+          length: 300
+        - name: UnHealthyHostCount
           statistics:
+          - Average
           - Maximum
           period: 60
-          length: 600
-        - name: ClusterStatus.red
-          statistics:
-          - Maximum
-          period: 60
-          length: 600
+          length: 300
