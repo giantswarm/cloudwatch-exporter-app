@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.1] - 2026-07-02
+
 ### Added
 
 - Initial chart, wrapping the upstream `prometheus-yet-another-cloudwatch-exporter` chart (`0.46.1`, appVersion `v0.65.0`) from the `prometheus-community` Helm repository. The upstream chart is vendored with `vendir` and customized through the values patch in `sync/patches/values/`.
@@ -25,4 +27,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Pin the test pod's `busybox` image to a tagged mirror and set its CPU request and memory limit to satisfy kube-linter.
 
-[Unreleased]: https://github.com/giantswarm/cloudwatch-exporter-app/tree/main
+[Unreleased]: https://github.com/giantswarm/cloudwatch-exporter-app/compare/v0.0.1...HEAD
+[0.0.1]: https://github.com/giantswarm/cloudwatch-exporter-app/releases/tag/v0.0.1
