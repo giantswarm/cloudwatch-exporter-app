@@ -212,38 +212,9 @@ prometheusRule:
 configMap:
   enabled: true
 
-config: |-
-  apiVersion: v1alpha1
-  sts-region: eu-west-1
-  discovery:
-    exportedTagsOnMetrics:
-      AWS/ES:
-        - Name
-    jobs:
-    - type: AWS/ES
-      regions:
-        - eu-west-1
-      searchTags:
-        - key: type
-          value: ^(easteregg|k8s)$
-      metrics:
-        - name: FreeStorageSpace
-          statistics:
-          - Sum
-          period: 60
-          length: 600
-        - name: ClusterStatus.green
-          statistics:
-          - Minimum
-          period: 60
-          length: 600
-        - name: ClusterStatus.yellow
-          statistics:
-          - Maximum
-          period: 60
-          length: 600
-        - name: ClusterStatus.red
-          statistics:
-          - Maximum
-          period: 60
-          length: 600
+# Cluster ID that owns the NLBs to scrape. Rendered as the
+# elbv2.k8s.aws/cluster search tag value in the generated config.
+clusterID: ""
+
+# AWS region used for STS and CloudWatch discovery.
+region: eu-north-1
