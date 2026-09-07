@@ -1,0 +1,20 @@
+diff --git a/helm/cloudwatch-exporter/README.md.gotmpl b/helm/cloudwatch-exporter/README.md.gotmpl
+new file mode 100644
+index 0000000..2e576b3
+--- /dev/null
++++ b/helm/cloudwatch-exporter/README.md.gotmpl
+@@ -0,0 +1,14 @@
++{{ template "chart.header" . }}
++{{ template "chart.deprecationWarning" . }}
++
++{{ template "chart.description" . }}
++
++{{ template "chart.homepageLine" . }}
++
++{{ template "chart.maintainersSection" . }}
++
++{{ template "chart.sourcesSection" . }}
++
++{{ template "chart.requirementsSection" . }}
++
++{{ template "chart.valuesSection" . }}
