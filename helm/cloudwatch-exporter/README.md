@@ -1,51 +1,79 @@
-# yet-another-cloudwatch-exporter
+# cloudwatch-exporter
 
-YACE, or `yet another cloudwatch exporter`, is a Prometheus exporter for AWS CloudWatch metrics.
+Yace - Yet Another CloudWatch Exporter
 
-This chart bootstraps a [YACE](https://github.com/prometheus-community/yet-another-cloudwatch-exporter) deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+**Homepage:** <https://github.com/giantswarm/cloudwatch-exporter-app>
 
-## Usage
+## Source Code
 
-The chart is distributed as an [OCI Artifact](https://helm.sh/docs/topics/registries/) as well as via a traditional [Helm Repository](https://helm.sh/docs/topics/chart_repository/).
+* <https://github.com/prometheus-community/yet-another-cloudwatch-exporter>
 
-- OCI Artifact: `oci://ghcr.io/prometheus-community/charts/prometheus-yet-another-cloudwatch-exporter`
-- Helm Repository: `https://prometheus-community.github.io/helm-charts` with chart `prometheus-yet-another-cloudwatch-exporter`
+## Values
 
-The installation instructions use the OCI registry. Refer to the [`helm repo`]([`helm repo`](https://helm.sh/docs/helm/helm_repo/)) command documentation for information on installing charts via the traditional repository.
-
-### Install Chart
-
-```console
-helm install [RELEASE_NAME] oci://ghcr.io/prometheus-community/charts/prometheus-yet-another-cloudwatch-exporter
-```
-
-_See [configuration](#configuration) below._
-
-_See [helm install](https://helm.sh/docs/helm/helm_install/) for command documentation._
-
-### Uninstall Chart
-
-```console
-helm uninstall [RELEASE_NAME]
-```
-
-This removes all the Kubernetes components associated with the chart and deletes the release.
-
-_See [helm uninstall](https://helm.sh/docs/helm/helm_uninstall/) for command documentation._
-
-_See [helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) for command documentation._
-
-## Configuration
-
-See [Customizing the Chart Before Installing](https://helm.sh/docs/intro/using_helm/#customizing-the-chart-before-installing). To see all configurable options with detailed comments, visit the chart's [values.yaml](./values.yaml), or run these configuration commands:
-
-```console
-helm show values oci://ghcr.io/prometheus-community/charts/prometheus-yet-another-cloudwatch-exporter
-```
-
-## Migrate from nerdswords/helm-charts (before version 0.39.0)
-
-If you are migrate from the [`nerdswords/helm-charts` repository](https://github.com/nerdswords/helm-charts/tree/main/charts/yet-another-cloudwatch-exporter), you must consider the following changes:
-
-- the chart name has changed from `yet-another-cloudwatch-exporter` to `prometheus-yet-another-cloudwatch-exporter`.
-- to avoid conflicts with the new chart name, you can set the `nameOverride` value to `yet-another-cloudwatch-exporter` in your `values.yaml` file.
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| replicaCount | int | `1` |  |
+| image.registry | string | `"gsoci.azurecr.io"` |  |
+| image.repository | string | `"giantswarm/yet-another-cloudwatch-exporter"` |  |
+| image.pullPolicy | string | `"IfNotPresent"` |  |
+| image.tag | string | `""` |  |
+| imagePullSecrets | list | `[]` |  |
+| nameOverride | string | `""` |  |
+| fullnameOverride | string | `""` |  |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.labels | object | `{}` | Labels to add to the service account |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account. Keys and values can be templated, as an example: "{{ .Values.foo }}: {{ .Values.bar }}" |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| podAnnotations | object | `{}` |  |
+| podLabels | object | `{}` |  |
+| deployment.labels | object | `{}` |  |
+| portName | string | `"http"` |  |
+| containerPort | int | `5000` |  |
+| podSecurityContext.runAsNonRoot | bool | `true` |  |
+| podSecurityContext.runAsUser | int | `1000` |  |
+| podSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
+| securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| securityContext.privileged | bool | `false` |  |
+| securityContext.runAsNonRoot | bool | `true` |  |
+| securityContext.runAsUser | int | `1000` |  |
+| securityContext.readOnlyRootFilesystem | bool | `true` |  |
+| securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| securityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
+| service.type | string | `"ClusterIP"` |  |
+| service.port | int | `80` |  |
+| service.annotations | object | `{}` | Annotations to add to the service |
+| testConnection | bool | `true` |  |
+| ingress.enabled | bool | `false` |  |
+| ingress.className | string | `""` |  |
+| ingress.annotations | object | `{}` |  |
+| ingress.hosts[0].host | string | `"chart-example.local"` |  |
+| ingress.hosts[0].paths[0].path | string | `"/"` |  |
+| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
+| ingress.tls | list | `[]` |  |
+| resources.requests.cpu | string | `"100m"` |  |
+| resources.requests.memory | string | `"128Mi"` |  |
+| resources.limits.memory | string | `"256Mi"` |  |
+| nodeSelector | object | `{}` |  |
+| priorityClassName | string | `nil` |  |
+| tolerations | list | `[]` |  |
+| affinity | object | `{}` |  |
+| podDisruptionBudget.enabled | bool | `false` |  |
+| podDisruptionBudget.minAvailable | int | `1` |  |
+| podDisruptionBudget.unhealthyPodEvictionPolicy | string | `"AlwaysAllow"` |  |
+| extraEnv | list | `[]` |  |
+| extraEnvFrom | list | `[]` |  |
+| extraArgs | object | `{}` |  |
+| extraVolumeMounts | list | `[]` |  |
+| extraVolumes | list | `[]` |  |
+| lifecycle | object | `{}` |  |
+| aws.role | string | `nil` |  |
+| aws.secret.name | string | `nil` |  |
+| aws.secret.includesSessionToken | bool | `false` |  |
+| aws.aws_access_key_id | string | `nil` |  |
+| aws.aws_secret_access_key | string | `nil` |  |
+| serviceMonitor.enabled | bool | `true` |  |
+| prometheusRule.enabled | bool | `false` |  |
+| configMap.enabled | bool | `true` |  |
+| clusterID | string | `""` |  |
+| region | string | `"eu-north-1"` |  |
