@@ -6,7 +6,7 @@ directories:
   - path: cloudwatch-exporter
     helmChart:
       name: prometheus-yet-another-cloudwatch-exporter
-      version: "0.46.1"
+      version: "0.47.0"
       repository:
         url: https://prometheus-community.github.io/helm-charts
 - path: helm/cloudwatch-exporter
@@ -23,3 +23,7 @@ directories:
       # Config generated statically from structured values (clusterID, region)
       # instead of the upstream opaque .Values.config string; owned by us.
       - templates/configmap.yaml
+      - .schema.yaml
+      - README.md.gotmpl
+      - zz_generated.app-platform.values.yaml
+
