@@ -1,5 +1,5 @@
 diff --git a/vendor/cloudwatch-exporter/README.md b/helm/cloudwatch-exporter/README.md
-index 85715d4..ad824a6 100644
+index 85715d4..ef03687 100644
 --- a/vendor/cloudwatch-exporter/README.md
 +++ b/helm/cloudwatch-exporter/README.md
 @@ -1,51 +1,81 @@
@@ -133,5 +133,5 @@ index 85715d4..ad824a6 100644
 +| configMap.enabled | bool | `true` |  |
 +| clusterID | string | `""` |  |
 +| region | string | `"eu-north-1"` |  |
-+| managementCluster | object | `{}` |  |
++| managementCluster | string | `""` |  |
 +| helm | object | `{}` |  |

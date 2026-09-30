@@ -1,9 +1,9 @@
 diff --git a/helm/cloudwatch-exporter/values.schema.json b/helm/cloudwatch-exporter/values.schema.json
 new file mode 100644
-index 0000000..d9b26e9
+index 0000000..bd40734
 --- /dev/null
 +++ b/helm/cloudwatch-exporter/values.schema.json
-@@ -0,0 +1,406 @@
+@@ -0,0 +1,405 @@
 +{
 +    "$schema": "https://json-schema.org/draft/2020-12/schema",
 +    "type": "object",
@@ -199,8 +199,7 @@ index 0000000..d9b26e9
 +            "additionalProperties": true
 +        },
 +        "managementCluster": {
-+            "type": "object",
-+            "additionalProperties": true
++            "type": "string"
 +        },
 +        "nameOverride": {
 +            "type": "string"
