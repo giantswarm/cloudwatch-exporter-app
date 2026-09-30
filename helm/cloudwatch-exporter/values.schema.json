@@ -5,7 +5,7 @@
     "properties": {
         "affinity": {
             "type": "object",
-            "additionalProperties": false
+            "additionalProperties": true
         },
         "aws": {
             "type": "object",
@@ -83,13 +83,13 @@
             "properties": {
                 "labels": {
                     "type": "object",
-                    "additionalProperties": false
+                    "additionalProperties": true
                 }
             }
         },
         "extraArgs": {
             "type": "object",
-            "additionalProperties": false
+            "additionalProperties": true
         },
         "extraEnv": {
             "type": "array"
@@ -116,6 +116,10 @@
             ],
             "description": "Global values shared between all subcharts",
             "$comment": "Added automatically by 'helm schema' to allow this chart to be used as a Helm dependency, as this schema would otherwise not allow Helm's special 'global' values key."
+        },
+        "helm": {
+            "type": "object",
+            "additionalProperties": true
         },
         "image": {
             "type": "object",
@@ -144,7 +148,7 @@
             "properties": {
                 "annotations": {
                     "type": "object",
-                    "additionalProperties": false
+                    "additionalProperties": true
                 },
                 "className": {
                     "type": "string"
@@ -186,18 +190,22 @@
         },
         "lifecycle": {
             "type": "object",
-            "additionalProperties": false
+            "additionalProperties": true
+        },
+        "managementCluster": {
+            "type": "object",
+            "additionalProperties": true
         },
         "nameOverride": {
             "type": "string"
         },
         "nodeSelector": {
             "type": "object",
-            "additionalProperties": false
+            "additionalProperties": true
         },
         "podAnnotations": {
             "type": "object",
-            "additionalProperties": false
+            "additionalProperties": true
         },
         "podDisruptionBudget": {
             "type": "object",
@@ -216,7 +224,7 @@
         },
         "podLabels": {
             "type": "object",
-            "additionalProperties": false
+            "additionalProperties": true
         },
         "podSecurityContext": {
             "type": "object",
@@ -342,7 +350,7 @@
                 "annotations": {
                     "type": "object",
                     "description": "Annotations to add to the service",
-                    "additionalProperties": false
+                    "additionalProperties": true
                 },
                 "port": {
                     "type": "integer"
@@ -356,7 +364,7 @@
                 "annotations": {
                     "type": "object",
                     "description": "Annotations to add to the service account. Keys and values can be templated, as an example: \"{{ .Values.foo }}: {{ .Values.bar }}\"",
-                    "additionalProperties": false
+                    "additionalProperties": true
                 },
                 "automountServiceAccountToken": {
                     "type": "boolean"
@@ -368,7 +376,7 @@
                 "labels": {
                     "type": "object",
                     "description": "Labels to add to the service account",
-                    "additionalProperties": false
+                    "additionalProperties": true
                 },
                 "name": {
                     "type": "string",
