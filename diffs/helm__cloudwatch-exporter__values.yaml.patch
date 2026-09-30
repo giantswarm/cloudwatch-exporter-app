@@ -1,5 +1,5 @@
 diff --git a/vendor/cloudwatch-exporter/values.yaml b/helm/cloudwatch-exporter/values.yaml
-index 17d7b3a..93e2e20 100644
+index 17d7b3a..0b64250 100644
 --- a/vendor/cloudwatch-exporter/values.yaml
 +++ b/helm/cloudwatch-exporter/values.yaml
 @@ -5,8 +5,8 @@
@@ -195,5 +195,5 @@ index 17d7b3a..93e2e20 100644
 +# AWS region used for STS and CloudWatch discovery.
 +region: eu-north-1
 +
-+managementCluster: {}  # @schema skipProperties: true; additionalProperties: true
++managementCluster: ""
 +helm: {}  # @schema skipProperties: true; additionalProperties: true
