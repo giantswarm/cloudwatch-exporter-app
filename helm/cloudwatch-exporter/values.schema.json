@@ -193,8 +193,7 @@
             "additionalProperties": true
         },
         "managementCluster": {
-            "type": "object",
-            "additionalProperties": true
+            "type": "string"
         },
         "nameOverride": {
             "type": "string"

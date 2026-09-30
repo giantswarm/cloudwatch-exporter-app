@@ -77,5 +77,5 @@ Yace - Yet Another CloudWatch Exporter
 | configMap.enabled | bool | `true` |  |
 | clusterID | string | `""` |  |
 | region | string | `"eu-north-1"` |  |
-| managementCluster | object | `{}` |  |
+| managementCluster | string | `""` |  |
 | helm | object | `{}` |  |

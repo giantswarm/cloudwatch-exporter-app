@@ -219,5 +219,5 @@ clusterID: ""
 # AWS region used for STS and CloudWatch discovery.
 region: eu-north-1
 
-managementCluster: {}  # @schema skipProperties: true; additionalProperties: true
+managementCluster: ""
 helm: {}  # @schema skipProperties: true; additionalProperties: true
