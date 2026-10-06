@@ -21,6 +21,7 @@ find helm/cloudwatch-exporter/ -type f -exec sed -i 's/[[:space:]]*$//' {} \;
 # Patches
 ./sync/patches/values/patch.sh
 ./sync/patches/helpers/patch.sh
+./sync/patches/chart-label/patch.sh
 
 # Store diffs
 rm -f ./diffs/*
