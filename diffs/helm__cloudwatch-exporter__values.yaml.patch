@@ -1,5 +1,5 @@
 diff --git a/vendor/cloudwatch-exporter/values.yaml b/helm/cloudwatch-exporter/values.yaml
-index 17d7b3a..794f111 100644
+index 17d7b3a..0b64250 100644
 --- a/vendor/cloudwatch-exporter/values.yaml
 +++ b/helm/cloudwatch-exporter/values.yaml
 @@ -5,8 +5,8 @@
@@ -13,7 +13,33 @@ index 17d7b3a..794f111 100644
    pullPolicy: IfNotPresent
    # Overrides the image tag whose default is the chart appVersion.
    tag: ""
-@@ -41,16 +41,23 @@ portName: http
+@@ -19,9 +19,9 @@ serviceAccount:
+   # -- Specifies whether a service account should be created
+   create: true
+   # -- Labels to add to the service account
+-  labels: {}
++  labels: {}  # @schema additionalProperties: true
+   # -- Annotations to add to the service account. Keys and values can be templated, as an example: "{{ .Values.foo }}: {{ .Values.bar }}"
+-  annotations: {}
++  annotations: {}  # @schema additionalProperties: true
+   # -- The name of the service account to use.
+   # If not set and create is true, a name is generated using the fullname template
+   name: ""
+@@ -30,40 +30,47 @@ serviceAccount:
+   # the default will probably be fine.
+   automountServiceAccountToken: true
+ 
+-podAnnotations: {}
++podAnnotations: {}  # @schema additionalProperties: true
+ 
+-podLabels: {}
++podLabels: {}  # @schema additionalProperties: true
+ 
+ deployment:
+-  labels: {}
++  labels: {}  # @schema additionalProperties: true
+ 
+ portName: http
  
  containerPort: 5000
  
@@ -47,7 +73,22 @@ index 17d7b3a..794f111 100644
  
  service:
    type: ClusterIP
-@@ -76,17 +83,12 @@ ingress:
+   port: 80
+   # -- Annotations to add to the service
+-  annotations: {}
++  annotations: {}  # @schema additionalProperties: true
+ 
+ testConnection: true
+ 
+ ingress:
+   enabled: false
+   className: ""
+-  annotations: {}
++  annotations: {}  # @schema additionalProperties: true
+     # kubernetes.io/ingress.class: nginx
+     # kubernetes.io/tls-acme: "true"
+   hosts:
+@@ -76,25 +83,20 @@ ingress:
    #    hosts:
    #      - chart-example.local
  
@@ -69,8 +110,36 @@ index 17d7b3a..794f111 100644
 +  limits:
 +    memory: 256Mi
  
- nodeSelector: {}
+-nodeSelector: {}
++nodeSelector: {}  # @schema additionalProperties: true
  
+ priorityClassName:
+ 
+ tolerations: []
+ 
+-affinity: {}
++affinity: {}  # @schema additionalProperties: true
+ 
+ podDisruptionBudget:
+   enabled: false
+@@ -112,7 +114,7 @@ extraEnvFrom: []
+   # - secretRef:
+   #     name: secrets
+ 
+-extraArgs: {}
++extraArgs: {}  # @schema additionalProperties: true
+   # scraping-interval: 300
+ 
+ extraVolumeMounts: []
+@@ -131,7 +133,7 @@ extraVolumes: []
+ 
+ # Container lifecycle hooks
+ # Ref. https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
+-lifecycle: {}
++lifecycle: {}  # @schema additionalProperties: true
+ 
+ aws:
+   role:
 @@ -151,7 +153,7 @@ aws:
  
  serviceMonitor:
@@ -80,7 +149,7 @@ index 17d7b3a..794f111 100644
    # Set the namespace the ServiceMonitor should be deployed
    # namespace: monitoring
    # Set how frequently Prometheus should scrape
-@@ -210,38 +212,9 @@ prometheusRule:
+@@ -210,38 +212,12 @@ prometheusRule:
  configMap:
    enabled: true
  
@@ -125,3 +194,6 @@ index 17d7b3a..794f111 100644
 +
 +# AWS region used for STS and CloudWatch discovery.
 +region: eu-north-1
++
++managementCluster: ""
++helm: {}  # @schema skipProperties: true; additionalProperties: true

@@ -1,9 +1,9 @@
 diff --git a/helm/cloudwatch-exporter/values.schema.json b/helm/cloudwatch-exporter/values.schema.json
 new file mode 100644
-index 0000000..ef0107c
+index 0000000..bd40734
 --- /dev/null
 +++ b/helm/cloudwatch-exporter/values.schema.json
-@@ -0,0 +1,398 @@
+@@ -0,0 +1,405 @@
 +{
 +    "$schema": "https://json-schema.org/draft/2020-12/schema",
 +    "type": "object",
@@ -11,7 +11,7 @@ index 0000000..ef0107c
 +    "properties": {
 +        "affinity": {
 +            "type": "object",
-+            "additionalProperties": false
++            "additionalProperties": true
 +        },
 +        "aws": {
 +            "type": "object",
@@ -89,13 +89,13 @@ index 0000000..ef0107c
 +            "properties": {
 +                "labels": {
 +                    "type": "object",
-+                    "additionalProperties": false
++                    "additionalProperties": true
 +                }
 +            }
 +        },
 +        "extraArgs": {
 +            "type": "object",
-+            "additionalProperties": false
++            "additionalProperties": true
 +        },
 +        "extraEnv": {
 +            "type": "array"
@@ -122,6 +122,10 @@ index 0000000..ef0107c
 +            ],
 +            "description": "Global values shared between all subcharts",
 +            "$comment": "Added automatically by 'helm schema' to allow this chart to be used as a Helm dependency, as this schema would otherwise not allow Helm's special 'global' values key."
++        },
++        "helm": {
++            "type": "object",
++            "additionalProperties": true
 +        },
 +        "image": {
 +            "type": "object",
@@ -150,7 +154,7 @@ index 0000000..ef0107c
 +            "properties": {
 +                "annotations": {
 +                    "type": "object",
-+                    "additionalProperties": false
++                    "additionalProperties": true
 +                },
 +                "className": {
 +                    "type": "string"
@@ -192,18 +196,21 @@ index 0000000..ef0107c
 +        },
 +        "lifecycle": {
 +            "type": "object",
-+            "additionalProperties": false
++            "additionalProperties": true
++        },
++        "managementCluster": {
++            "type": "string"
 +        },
 +        "nameOverride": {
 +            "type": "string"
 +        },
 +        "nodeSelector": {
 +            "type": "object",
-+            "additionalProperties": false
++            "additionalProperties": true
 +        },
 +        "podAnnotations": {
 +            "type": "object",
-+            "additionalProperties": false
++            "additionalProperties": true
 +        },
 +        "podDisruptionBudget": {
 +            "type": "object",
@@ -222,7 +229,7 @@ index 0000000..ef0107c
 +        },
 +        "podLabels": {
 +            "type": "object",
-+            "additionalProperties": false
++            "additionalProperties": true
 +        },
 +        "podSecurityContext": {
 +            "type": "object",
@@ -348,7 +355,7 @@ index 0000000..ef0107c
 +                "annotations": {
 +                    "type": "object",
 +                    "description": "Annotations to add to the service",
-+                    "additionalProperties": false
++                    "additionalProperties": true
 +                },
 +                "port": {
 +                    "type": "integer"
@@ -362,7 +369,7 @@ index 0000000..ef0107c
 +                "annotations": {
 +                    "type": "object",
 +                    "description": "Annotations to add to the service account. Keys and values can be templated, as an example: \"{{ .Values.foo }}: {{ .Values.bar }}\"",
-+                    "additionalProperties": false
++                    "additionalProperties": true
 +                },
 +                "automountServiceAccountToken": {
 +                    "type": "boolean"
@@ -374,7 +381,7 @@ index 0000000..ef0107c
 +                "labels": {
 +                    "type": "object",
 +                    "description": "Labels to add to the service account",
-+                    "additionalProperties": false
++                    "additionalProperties": true
 +                },
 +                "name": {
 +                    "type": "string",

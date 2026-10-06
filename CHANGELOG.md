@@ -17,7 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Values schema now accepts arbitrary keys in map values (annotations, labels, `nodeSelector`, ...) and the `managementCluster` and `helm` values injected on management clusters.
 - Chart README is now rendered from the chart's own template rather than carrying upstream boilerplate.
+- Values schema now types `managementCluster` as a string, matching the value injected by the catalog config.
 
 ## [0.0.1] - 2026-07-02
 

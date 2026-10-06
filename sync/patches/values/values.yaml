@@ -19,9 +19,9 @@ serviceAccount:
   # -- Specifies whether a service account should be created
   create: true
   # -- Labels to add to the service account
-  labels: {}
+  labels: {}  # @schema additionalProperties: true
   # -- Annotations to add to the service account. Keys and values can be templated, as an example: "{{ .Values.foo }}: {{ .Values.bar }}"
-  annotations: {}
+  annotations: {}  # @schema additionalProperties: true
   # -- The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
@@ -30,12 +30,12 @@ serviceAccount:
   # the default will probably be fine.
   automountServiceAccountToken: true
 
-podAnnotations: {}
+podAnnotations: {}  # @schema additionalProperties: true
 
-podLabels: {}
+podLabels: {}  # @schema additionalProperties: true
 
 deployment:
-  labels: {}
+  labels: {}  # @schema additionalProperties: true
 
 portName: http
 
@@ -63,14 +63,14 @@ service:
   type: ClusterIP
   port: 80
   # -- Annotations to add to the service
-  annotations: {}
+  annotations: {}  # @schema additionalProperties: true
 
 testConnection: true
 
 ingress:
   enabled: false
   className: ""
-  annotations: {}
+  annotations: {}  # @schema additionalProperties: true
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
@@ -90,13 +90,13 @@ resources:
   limits:
     memory: 256Mi
 
-nodeSelector: {}
+nodeSelector: {}  # @schema additionalProperties: true
 
 priorityClassName:
 
 tolerations: []
 
-affinity: {}
+affinity: {}  # @schema additionalProperties: true
 
 podDisruptionBudget:
   enabled: false
@@ -114,7 +114,7 @@ extraEnvFrom: []
   # - secretRef:
   #     name: secrets
 
-extraArgs: {}
+extraArgs: {}  # @schema additionalProperties: true
   # scraping-interval: 300
 
 extraVolumeMounts: []
@@ -133,7 +133,7 @@ extraVolumes: []
 
 # Container lifecycle hooks
 # Ref. https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
-lifecycle: {}
+lifecycle: {}  # @schema additionalProperties: true
 
 aws:
   role:
@@ -218,3 +218,6 @@ clusterID: ""
 
 # AWS region used for STS and CloudWatch discovery.
 region: eu-north-1
+
+managementCluster: ""
+helm: {}  # @schema skipProperties: true; additionalProperties: true
