@@ -30,6 +30,7 @@ for f in $(git --no-pager diff --no-exit-code --no-color --no-index vendor/cloud
         # Skip helm/cloudwatch-exporter/Chart.yaml; as we take it as our own.
         [[ "$f" == "helm/cloudwatch-exporter/Chart.yaml" ]] && continue
         [[ "$f" == "helm/cloudwatch-exporter/Chart.lock" ]] && continue
+        [[ "$f" == "helm/cloudwatch-exporter/.schema.yaml" ]] && continue
 
         base_file="vendor/cloudwatch-exporter/${f#"helm/cloudwatch-exporter/"}"
         [[ ! -e $base_file ]] && base_file="/dev/null"
