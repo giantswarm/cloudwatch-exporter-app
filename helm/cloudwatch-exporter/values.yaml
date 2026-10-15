@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  registry: gsoci.azurecr.io
-  repository: giantswarm/yet-another-cloudwatch-exporter
+  registry: quay.io
+  repository: prometheuscommunity/yet-another-cloudwatch-exporter
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -19,9 +19,9 @@ serviceAccount:
   # -- Specifies whether a service account should be created
   create: true
   # -- Labels to add to the service account
-  labels: {}  # @schema additionalProperties: true
+  labels: {}
   # -- Annotations to add to the service account. Keys and values can be templated, as an example: "{{ .Values.foo }}: {{ .Values.bar }}"
-  annotations: {}  # @schema additionalProperties: true
+  annotations: {}
   # -- The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
@@ -30,47 +30,40 @@ serviceAccount:
   # the default will probably be fine.
   automountServiceAccountToken: true
 
-podAnnotations: {}  # @schema additionalProperties: true
+podAnnotations: {}
 
-podLabels: {}  # @schema additionalProperties: true
+podLabels: {}
 
 deployment:
-  labels: {}  # @schema additionalProperties: true
+  labels: {}
 
 portName: http
 
 containerPort: 5000
 
-podSecurityContext:
-  runAsNonRoot: true
-  runAsUser: 1000
-  seccompProfile:
-    type: RuntimeDefault
+podSecurityContext: {}
+  # fsGroup: 2000
 
-securityContext:
-  allowPrivilegeEscalation: false
-  privileged: false
-  runAsNonRoot: true
-  runAsUser: 1000
-  readOnlyRootFilesystem: true
-  capabilities:
-    drop:
-      - ALL
-  seccompProfile:
-    type: RuntimeDefault
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
 
 service:
   type: ClusterIP
   port: 80
   # -- Annotations to add to the service
-  annotations: {}  # @schema additionalProperties: true
+  annotations: {}
 
 testConnection: true
 
 ingress:
   enabled: false
   className: ""
-  annotations: {}  # @schema additionalProperties: true
+  annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
@@ -83,20 +76,25 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources:
-  requests:
-    cpu: 100m
-    memory: 128Mi
-  limits:
-    memory: 256Mi
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
-nodeSelector: {}  # @schema additionalProperties: true
+nodeSelector: {}
 
 priorityClassName:
 
 tolerations: []
 
-affinity: {}  # @schema additionalProperties: true
+affinity: {}
 
 podDisruptionBudget:
   enabled: false
@@ -114,7 +112,7 @@ extraEnvFrom: []
   # - secretRef:
   #     name: secrets
 
-extraArgs: {}  # @schema additionalProperties: true
+extraArgs: {}
   # scraping-interval: 300
 
 extraVolumeMounts: []
@@ -133,7 +131,7 @@ extraVolumes: []
 
 # Container lifecycle hooks
 # Ref. https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
-lifecycle: {}  # @schema additionalProperties: true
+lifecycle: {}
 
 aws:
   role:
@@ -153,7 +151,7 @@ aws:
 
 serviceMonitor:
   # When set true then use a ServiceMonitor to configure scraping
-  enabled: true
+  enabled: false
   # Set the namespace the ServiceMonitor should be deployed
   # namespace: monitoring
   # Set how frequently Prometheus should scrape
@@ -212,12 +210,38 @@ prometheusRule:
 configMap:
   enabled: true
 
-# Cluster ID that owns the NLBs to scrape. Rendered as the
-# elbv2.k8s.aws/cluster search tag value in the generated config.
-clusterID: ""
-
-# AWS region used for STS and CloudWatch discovery.
-region: eu-north-1
-
-managementCluster: ""
-helm: {}  # @schema skipProperties: true; additionalProperties: true
+config: |-
+  apiVersion: v1alpha1
+  sts-region: eu-west-1
+  discovery:
+    exportedTagsOnMetrics:
+      AWS/ES:
+        - Name
+    jobs:
+    - type: AWS/ES
+      regions:
+        - eu-west-1
+      searchTags:
+        - key: type
+          value: ^(easteregg|k8s)$
+      metrics:
+        - name: FreeStorageSpace
+          statistics:
+          - Sum
+          period: 60
+          length: 600
+        - name: ClusterStatus.green
+          statistics:
+          - Minimum
+          period: 60
+          length: 600
+        - name: ClusterStatus.yellow
+          statistics:
+          - Maximum
+          period: 60
+          length: 600
+        - name: ClusterStatus.red
+          statistics:
+          - Maximum
+          period: 60
+          length: 600
