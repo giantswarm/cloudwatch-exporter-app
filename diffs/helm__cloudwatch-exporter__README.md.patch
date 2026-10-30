@@ -1,8 +1,8 @@
 diff --git a/vendor/cloudwatch-exporter/README.md b/helm/cloudwatch-exporter/README.md
-index 85715d4..ef03687 100644
+index 85715d4..b599907 100644
 --- a/vendor/cloudwatch-exporter/README.md
 +++ b/helm/cloudwatch-exporter/README.md
-@@ -1,51 +1,81 @@
+@@ -1,51 +1,94 @@
 -# yet-another-cloudwatch-exporter
 -
 -YACE, or `yet another cloudwatch exporter`, is a Prometheus exporter for AWS CloudWatch metrics.
@@ -131,6 +131,19 @@ index 85715d4..ef03687 100644
 +| serviceMonitor.enabled | bool | `true` |  |
 +| prometheusRule.enabled | bool | `false` |  |
 +| configMap.enabled | bool | `true` |  |
++| route.main.enabled | bool | `false` |  |
++| route.main.apiVersion | string | `""` |  |
++| route.main.kind | string | `""` |  |
++| route.main.name | string | `""` |  |
++| route.main.annotations | object | `{}` |  |
++| route.main.labels | object | `{}` |  |
++| route.main.parentRefs | list | `[]` |  |
++| route.main.hostnames | list | `[]` |  |
++| route.main.additionalRules | list | `[]` |  |
++| route.main.filters | list | `[]` |  |
++| route.main.matches[0].path.type | string | `"PathPrefix"` |  |
++| route.main.matches[0].path.value | string | `"/"` |  |
++| route.main.httpsRedirect | bool | `false` |  |
 +| clusterID | string | `""` |  |
 +| region | string | `"eu-north-1"` |  |
 +| managementCluster | string | `""` |  |
