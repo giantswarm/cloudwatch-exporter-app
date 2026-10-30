@@ -16,6 +16,8 @@ data:
           - elbv2.k8s.aws/cluster
           - kubernetes.io/service-name
           - service.k8s.aws/stack
+          - gateway.envoyproxy.io/owning-gateway-name
+          - gateway.envoyproxy.io/owning-gateway-namespace
       jobs:
       - type: AWS/NetworkELB
         regions:
@@ -23,6 +25,8 @@ data:
         searchTags:
           - key: elbv2.k8s.aws/cluster
             value: {{ .Values.clusterID | quote }}
+          - key: gateway.envoyproxy.io/owning-gateway-name
+            value: ".+"
         metrics:
           - name: ActiveFlowCount
             statistics:
