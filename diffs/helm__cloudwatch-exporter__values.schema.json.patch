@@ -1,9 +1,9 @@
 diff --git a/helm/cloudwatch-exporter/values.schema.json b/helm/cloudwatch-exporter/values.schema.json
 new file mode 100644
-index 0000000..bd40734
+index 0000000..2944841
 --- /dev/null
 +++ b/helm/cloudwatch-exporter/values.schema.json
-@@ -0,0 +1,405 @@
+@@ -0,0 +1,473 @@
 +{
 +    "$schema": "https://json-schema.org/draft/2020-12/schema",
 +    "type": "object",
@@ -298,6 +298,74 @@ index 0000000..bd40734
 +                        },
 +                        "memory": {
 +                            "type": "string"
++                        }
++                    }
++                }
++            }
++        },
++        "route": {
++            "type": "object",
++            "additionalProperties": false,
++            "properties": {
++                "main": {
++                    "type": "object",
++                    "additionalProperties": false,
++                    "properties": {
++                        "additionalRules": {
++                            "type": "array"
++                        },
++                        "annotations": {
++                            "type": "object",
++                            "additionalProperties": false
++                        },
++                        "apiVersion": {
++                            "type": "string"
++                        },
++                        "enabled": {
++                            "type": "boolean"
++                        },
++                        "filters": {
++                            "type": "array"
++                        },
++                        "hostnames": {
++                            "type": "array"
++                        },
++                        "httpsRedirect": {
++                            "type": "boolean"
++                        },
++                        "kind": {
++                            "type": "string"
++                        },
++                        "labels": {
++                            "type": "object",
++                            "additionalProperties": false
++                        },
++                        "matches": {
++                            "type": "array",
++                            "items": {
++                                "type": "object",
++                                "additionalProperties": false,
++                                "properties": {
++                                    "path": {
++                                        "type": "object",
++                                        "additionalProperties": false,
++                                        "properties": {
++                                            "type": {
++                                                "type": "string"
++                                            },
++                                            "value": {
++                                                "type": "string"
++                                            }
++                                        }
++                                    }
++                                }
++                            }
++                        },
++                        "name": {
++                            "type": "string"
++                        },
++                        "parentRefs": {
++                            "type": "array"
 +                        }
 +                    }
 +                }
