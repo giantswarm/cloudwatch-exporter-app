@@ -1,8 +1,8 @@
 diff --git a/vendor/cloudwatch-exporter/templates/configmap.yaml b/helm/cloudwatch-exporter/templates/configmap.yaml
-index d541f8d..f8be47c 100644
+index d541f8d..5e67e52 100644
 --- a/vendor/cloudwatch-exporter/templates/configmap.yaml
 +++ b/helm/cloudwatch-exporter/templates/configmap.yaml
-@@ -8,5 +8,69 @@ metadata:
+@@ -8,5 +8,73 @@ metadata:
      {{- include "yet-another-cloudwatch-exporter.labels" . | nindent 4 }}
  data:
    config.yml: |
@@ -15,6 +15,8 @@ index d541f8d..f8be47c 100644
 +          - elbv2.k8s.aws/cluster
 +          - kubernetes.io/service-name
 +          - service.k8s.aws/stack
++          - gateway.envoyproxy.io/owning-gateway-name
++          - gateway.envoyproxy.io/owning-gateway-namespace
 +      jobs:
 +      - type: AWS/NetworkELB
 +        regions:
@@ -22,6 +24,8 @@ index d541f8d..f8be47c 100644
 +        searchTags:
 +          - key: elbv2.k8s.aws/cluster
 +            value: {{ .Values.clusterID | quote }}
++          - key: gateway.envoyproxy.io/owning-gateway-name
++            value: ".+"
 +        metrics:
 +          - name: ActiveFlowCount
 +            statistics:
