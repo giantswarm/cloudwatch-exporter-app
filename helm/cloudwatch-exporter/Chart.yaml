@@ -4,7 +4,7 @@
 apiVersion: v2
 # Version of the packaged app. Matches the upstream chart's appVersion and the
 # image tag mirrored into gsoci (the "v" prefix is significant).
-appVersion: v0.67.0
+appVersion: v0.68.0
 # Make sure your name DOES NOT end in "app" or "-app".
 name: cloudwatch-exporter
 # Please describe what the app provides in a sentence or two.
