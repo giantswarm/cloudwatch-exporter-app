@@ -32,6 +32,8 @@ for f in $(git --no-pager diff --no-exit-code --no-color --no-index vendor/cloud
         [[ "$f" == "helm/cloudwatch-exporter/Chart.yaml" ]] && continue
         [[ "$f" == "helm/cloudwatch-exporter/Chart.lock" ]] && continue
         [[ "$f" == "helm/cloudwatch-exporter/.schema.yaml" ]] && continue
+        [[ "$f" == "helm/cloudwatch-exporter/values.schema.json" ]] && continue
+        [[ "$f" == "helm/cloudwatch-exporter/zz_generated.app-platform.values.yaml" ]] && continue
 
         base_file="vendor/cloudwatch-exporter/${f#"helm/cloudwatch-exporter/"}"
         [[ ! -e $base_file ]] && base_file="/dev/null"
