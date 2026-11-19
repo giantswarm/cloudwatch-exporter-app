@@ -3,7 +3,7 @@ directories:
 - contents:
   - helmChart:
       appVersion: v0.68.0
-      version: 0.49.0
+      version: 0.50.0
     path: cloudwatch-exporter
   path: vendor
 - contents:

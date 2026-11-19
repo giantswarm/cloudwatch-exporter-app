@@ -27,7 +27,7 @@ If release name contains chart name it will be used as a full name.
 Create chart name and version as used by the chart label.
 */}}
 {{- define "yet-another-cloudwatch-exporter.chart" -}}
-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimAll "-._" }}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
@@ -35,7 +35,6 @@ Common labels
 */}}
 {{- define "yet-another-cloudwatch-exporter.labels" -}}
 helm.sh/chart: {{ include "yet-another-cloudwatch-exporter.chart" . }}
-application.giantswarm.io/team: {{ index .Chart.Annotations "io.giantswarm.application.team" | quote }}
 {{ include "yet-another-cloudwatch-exporter.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
